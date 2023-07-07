@@ -1,0 +1,36 @@
+<.header>
+  Package <%= @package.id %>
+  <:subtitle>This is a package record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/packages/#{@package}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit package</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @package.name %></:item>
+  <:item title="Docs html url"><%= @package.docs_html_url %></:item>
+  <:item title="Download all"><%= @package.downloads_all %></:item>
+  <:item title="Downloads day"><%= @package.downloads_day %></:item>
+  <:item title="Downloads recent"><%= @package.downloads_recent %></:item>
+  <:item title="Downloads week"><%= @package.downloads_week %></:item>
+  <:item title="Latest docs url"><%= @package.latest_docs_url %></:item>
+  <:item title="Html url"><%= @package.html_url %></:item>
+  <:item title="Latest stable version"><%= @package.latest_stable_version %></:item>
+  <:item title="Meta"><code><%= raw inspect(@package.meta, pretty: true) %></code></:item>
+  <:item title="Last pulled"><%= @package.last_pulled %></:item>
+</.list>
+
+<.back navigate={~p"/packages"}>Back to packages</.back>
+
+<.modal :if={@live_action == :edit} id="package-modal" show on_cancel={JS.patch(~p"/packages/#{@package}")}>
+  <.live_component
+    module={HexDocsSearchWeb.PackageLive.FormComponent}
+    id={@package.id}
+    title={@page_title}
+    action={@live_action}
+    package={@package}
+    patch={~p"/packages/#{@package}"}
+  />
+</.modal>
