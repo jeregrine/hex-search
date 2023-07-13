@@ -1,50 +1,22 @@
 <.header>
-  Listing Packages
-  <:actions>
-    <.link patch={~p"/packages/new"}>
-      <.button>New Package</.button>
-    </.link>
-  </:actions>
+  Search all of HexDocs
 </.header>
 
-<.table
-  id="packages"
-  rows={@streams.packages}
-  row_click={fn {_id, package} -> JS.navigate(~p"/packages/#{package}") end}
->
-  <:col :let={{_id, package}} label="Name"><%= package.name %></:col>
-  <:col :let={{_id, package}} label="Docs html url"><%= package.docs_html_url %></:col>
-  <:col :let={{_id, package}} label="Downloads all"><%= package.downloads_all %></:col>
-  <:col :let={{_id, package}} label="Downloads day"><%= package.downloads_day %></:col>
-  <:col :let={{_id, package}} label="Downloads recent"><%= package.downloads_recent %></:col>
-  <:col :let={{_id, package}} label="Downloads week"><%= package.downloads_week %></:col>
-  <:col :let={{_id, package}} label="Latest docs url"><%= package.latest_docs_url %></:col>
-  <:col :let={{_id, package}} label="Html url"><%= package.html_url %></:col>
-  <:col :let={{_id, package}} label="Latest stable version"><%= package.latest_stable_version %></:col>
-  <:col :let={{_id, package}} label="Last pulled"><%= package.last_pulled %></:col>
-  <:action :let={{_id, package}}>
-    <div class="sr-only">
-      <.link navigate={~p"/packages/#{package}"}>Show</.link>
-    </div>
-    <.link patch={~p"/packages/#{package}/edit"}>Edit</.link>
-  </:action>
-  <:action :let={{id, package}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: package.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
-      Delete
-    </.link>
-  </:action>
-</.table>
+<.simple_form for={@form} phx-change="search" phx-debounce="500" phx-submit="search">
+  <.input field={@form[:search]} label="Search" type="search" phx-debounce="500"/>
+</.simple_form>
 
-<.modal :if={@live_action in [:new, :edit]} id="package-modal" show on_cancel={JS.patch(~p"/packages")}>
-  <.live_component
-    module={HexDocsSearchWeb.PackageLive.FormComponent}
-    id={@package.id || :new}
-    title={@page_title}
-    action={@live_action}
-    package={@package}
-    patch={~p"/packages"}
-  />
-</.modal>
+<.table
+  id="idxs"
+  rows={@streams.named_packages}
+>
+  <:col :let={{_id, idx}} label="Name">
+    <a href={idx.package.docs_html_url <> idx.ref} target="_BLANK" class="underline">
+      <%= idx.package.name %><span :if={idx.package.latest_stable_version}>(<%= String.trim(idx.package.latest_stable_version) %>)</span>
+      <.icon class="inline-block mx-2" name="hero-arrow-top-right-on-square" />
+    </a>
+  </:col>
+  <:col :let={{_id, idx}}><%= idx.type %></:col>
+  <:col :let={{_id, idx}}><%= idx.title %></:col>
+  <:col :let={{_id, idx}}><%= idx.rank %></:col>
+</.table>

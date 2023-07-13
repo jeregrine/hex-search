@@ -91,3 +91,5 @@ if config_env() == :prod do
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
 end
+
+config :hex_docs_search, :api_key, System.get_env("HEX_API_KEY") 

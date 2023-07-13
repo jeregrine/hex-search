@@ -18,11 +18,6 @@ defmodule HexDocsSearchWeb.Router do
     pipe_through :browser
 
     live "/", PackageLive.Index, :index
-    live "/packages/new", PackageLive.Index, :new
-    live "/packages/:id/edit", PackageLive.Index, :edit
-
-    live "/packages/:id", PackageLive.Show, :show
-    live "/packages/:id/show/edit", PackageLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
