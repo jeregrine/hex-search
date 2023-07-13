@@ -7,9 +7,6 @@ app = "hex-search"
 primary_region = "ord"
 kill_signal = "SIGTERM"
 
-[deploy]
-  release_command = "/app/bin/migrate"
-
 [env]
   PHX_HOST = "hex-search.fly.dev"
   PORT = "8080"
