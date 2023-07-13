@@ -2,8 +2,8 @@
   Search all of HexDocs
 </.header>
 
-<.simple_form for={@form} phx-change="search" phx-debounce="500" phx-submit="search">
-  <.input field={@form[:search]} label="Search" type="search" phx-debounce="500"/>
+<.simple_form for={@form} phx-change="search" phx-submit="search">
+  <.input field={@form[:search]} label="Search" type="search" phx-debounce="100"/>
 </.simple_form>
 
 <.table
