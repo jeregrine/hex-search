@@ -53,7 +53,6 @@ defmodule HexDocsSearch.Hex.InitialData do
     |> :erlang.binary_to_term()
     |> Kernel.++(special_packages())
     |> Enum.map(fn d ->
-      dbg(d)
       {:ok, package} = Hex.create_package(Map.take(d, ["name", "version", "docs_html_url", "meta", "html_url"]))
       {:ok, _p} = Hex.Hydrator.package(package, d)
     end)

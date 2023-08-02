@@ -9,7 +9,7 @@ defmodule HexDocsSearch.Repo.Migrations.AddFTSIndex do
         type,
         ref UNINDEXED,
         package_id UNINDEXED,
-      tokenize="porter unicode61 remove_diacritics 1 tokenchars '-_.'")
+      tokenize="porter")
     """
   end
 

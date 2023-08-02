@@ -42,3 +42,4 @@ npm-debug.log
 /.elixir-tools
 
 .envrc
+.DS_Store
