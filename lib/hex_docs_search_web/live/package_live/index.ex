@@ -36,7 +36,7 @@ defmodule HexDocsSearchWeb.PackageLive.Index do
 
   @impl true
   def handle_event("search", %{"value" => search}, socket) do
-    {:noreply, push_patch(socket, to: ~p"/?#{%{search: search}}")}
+    {:noreply, push_patch(socket, to: ~p"/?#{%{search: search}}", replace: true)}
   end
 
   def search(socket, search) do
