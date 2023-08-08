@@ -5,7 +5,7 @@ defmodule HexDocsSearch.Hex.Hydrator do
   import Ecto.Query, only: [from: 2]
 
   def find_outdated() do
-     last_pulled = from(p in Package, order_by: [desc: p.last_pulled], limit: 1, select: p.last_pulled) |> Repo.one!()
+    last_pulled = from(p in Package, order_by: [desc: p.last_pulled], limit: 1, select: p.last_pulled) |> Repo.one!()
     
     Enum.reduce_while(1..500, [], fn page, acc ->
       data = API.list!(%{page: page, sort: "updated_at"})
