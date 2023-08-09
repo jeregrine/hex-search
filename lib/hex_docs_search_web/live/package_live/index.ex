@@ -102,8 +102,8 @@ defmodule HexDocsSearchWeb.PackageLive.Index do
           <.doc_icon doc={@doc} />
         </div>
 
-        <div class="grow">
-          <%= get_title(@doc) %> 
+        <div class="grow overflow-x-scroll md:overflow-auto">
+          <%= get_title(@doc) %>
         </div>
       </li>
     """
@@ -111,7 +111,7 @@ defmodule HexDocsSearchWeb.PackageLive.Index do
 
   def doc_icon(assigns) do
     ~H"""
-      <p class="inline-block border border-gray-400 px-2 text-[0.5rem] leading-tight first-letter:text-xl first-letter:font-bold first-letter:text-slate-900">
+      <p class="block border border-gray-400 px-2 text-[0.5rem] leading-tight first-letter:text-xl first-letter:font-bold first-letter:text-slate-900">
         <%= icon_name(@doc) %>
       </p>
     """
