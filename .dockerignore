@@ -48,5 +48,6 @@ erl_crash.dump
 # Database files
 *.db
 *.db-*
+*.db_*
 
 /.elixir-tools
